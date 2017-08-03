@@ -133,10 +133,10 @@ var havamal = [
 "The sitters in the hall seldom know The kin of the new-comer: The best man is marred by faults, The worst is not without worth.",
 "Never laugh at the old when they offer counsel, Often their words are wise: From shriveled skin, from scraggy things",
 "That hand among the hides And move amid the guts, Clear words often come.",
-"135 Scoff not at guests nor to the gate chase them, But relieve the lonely and wretched,",
+"Scoff not at guests nor to the gate chase them, But relieve the lonely and wretched,",
 "Heavy the beam above the door; Hang a horse-shoe On it Against ill-luck, lest it should suddenly Crash and crush your guests.",
 "Medicines exist against many evils: Earth against drunkenness, heather against worms Oak against costiveness, corn against sorcery, Spurred rye against rupture, runes against bales The moon against feuds, fire against sickness, Earth makes harmless the floods.",
-"138 Wounded I hung on a wind-swept gallows For nine long nights, Pierced by a spear, pledged to Odhinn, Offered, myself to myself The wisest know not from whence spring The roots of that ancient rood",
+"Wounded I hung on a wind-swept gallows For nine long nights, Pierced by a spear, pledged to Odhinn, Offered, myself to myself The wisest know not from whence spring The roots of that ancient rood",
 "They gave me no bread, They gave me no mead, I looked down; with a loud cry I took up runes; from that tree I fell.",
 "Nine lays of power I learned from the famous Bolthor, Bestla' s father: He poured me a draught of precious mead, Mixed with magic Odrerir.",
 "Waxed and throve well; Word from word gave words to me, Deed from deed gave deeds to me,",
@@ -166,13 +166,4 @@ var havamal = [
 "The Wise One has spoken words in the hall, Needful for men to know, Unneedful for trolls to know: Hail to the speaker, Hail to the knower, Joy to him who has understood, Delight to those who have listened."
 ];
 
-randomHavamal = function(){
-  var min = 0;
-  var max = havamal.length;
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-displayHavamal = function(currentHavamal){
-  document.write(havamal[currentHavamal]);
-  document.write("<br>Havamal " + currentHavamal);
-}
+module.exports = havamal;

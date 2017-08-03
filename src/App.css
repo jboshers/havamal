@@ -1,0 +1,24 @@
+html {
+  font-size: 18px;
+}
+
+@media (max-width: 1000px) {
+  html {
+    font-size: calc(12px + .4vw);
+  }
+}
+
+.havamal {
+  display: flex;
+  align-items: center;
+}
+
+.verse {
+  padding: 3rem;
+  font-size: 2rem;
+  font-family: serif;
+}
+
+.citation {
+  font-size: 1rem;
+}
