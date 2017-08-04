@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
+import moment from 'moment';
 import havamalEnglish from './data/havamal-english.js';
 import havamalNorse from './data/havamal-norse.js';
-import stream from './stream.jpg'
 
 class App extends Component {
-  getVerse() {
-    const verse = window.location.hash.split('#')[1];
-    if (!verse) {
+  constructor(props){
+    super(props);
+    this.getRandom = this.getRandom.bind(this);
+    this.state = {
+      verse: this.getVerse()
+    };
+  }
+
+  getVerse(stanza) {
+    const verse = stanza || window.location.hash.split('#')[1];
+    if (verse === 'random') {
       return this.randomHavamal();
+    } else {
+      return this.havamalByDate();
     }
     return verse - 1;
   }
@@ -23,6 +33,17 @@ class App extends Component {
     } else {
       return "Ljóðatal";
     }
+  }
+
+  getRandom() {
+    this.setState({
+      verse: this.getVerse('random')
+    })
+  }
+
+  havamalByDate() {
+    const doy = moment().dayOfYear();
+    return doy === 164 ? (164 - 1) : doy % (164 + 1);
   }
 
   randomHavamal() {
@@ -40,14 +61,17 @@ class App extends Component {
   }
 
   render() {
-    const verse = this.getVerse();
+    const verse = this.state.verse;
     return (
       <div className="havamal">
-          <div className="verse" key={verse}>
+        <div className="verse" key={verse}>
+          <div key={verse}>
             <p className="verse__english">{this.displayHavamalEnglish(verse)}</p>
             <p className="verse__norse">{this.displayHavamalNorse(verse)}</p>
             <em className="citation">Havamal: {verse + 1}, {this.whichPoem(verse + 1)}</em>
           </div>
+        </div>
+          <a className="randomLink" onClick={this.getRandom}>Random Stanza</a>
       </div>
     );
   }
