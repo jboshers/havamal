@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   searchedStanza() {
-    const verse = this.history.location.pathname;
+    const verse = this.history.location.hash;
     if (verse !== '/' && parseInt(verse.slice(1) - 1, 10) < 164 ) {
       return parseInt(verse.slice(1) - 1, 10);
     }
@@ -36,7 +36,7 @@ class App extends Component {
 
   getRandom() {
     const verse =  this.randomHavamal();
-    this.history.push('/' + (verse + 1), verse);
+    this.history.push('/#' + (verse + 1), verse);
     this.setState({
       verse: verse
     })
