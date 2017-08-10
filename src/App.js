@@ -3,24 +3,16 @@ import './App.css';
 import moment from 'moment';
 import havamalEnglish from './data/havamal-english.js';
 import havamalNorse from './data/havamal-norse.js';
+import createHistory from 'history/createBrowserHistory'
 
 class App extends Component {
   constructor(props){
     super(props);
     this.getRandom = this.getRandom.bind(this);
+    this.history = createHistory();
     this.state = {
-      verse: this.getVerse()
+      verse: this.searchedStanza() || this.havamalByDate()
     };
-  }
-
-  getVerse(stanza) {
-    const verse = stanza || window.location.hash.split('#')[1];
-    if (verse === 'random') {
-      return this.randomHavamal();
-    } else {
-      return this.havamalByDate();
-    }
-    return verse - 1;
   }
 
   whichPoem(verse) {
@@ -35,9 +27,18 @@ class App extends Component {
     }
   }
 
+  searchedStanza() {
+    const verse = this.history.location.pathname;
+    if (verse !== '/' && parseInt(verse.slice(1) - 1, 10) < 164 ) {
+      return parseInt(verse.slice(1) - 1, 10);
+    }
+  }
+
   getRandom() {
+    const verse =  this.randomHavamal();
+    this.history.push('/' + (verse + 1), verse);
     this.setState({
-      verse: this.getVerse('random')
+      verse: verse
     })
   }
 
@@ -49,7 +50,7 @@ class App extends Component {
   randomHavamal() {
     var min = 0;
     var max = havamalEnglish.length;
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   displayHavamalEnglish(verse){
@@ -62,14 +63,13 @@ class App extends Component {
 
   render() {
     const verse = this.state.verse;
+    const prettyVerse = this.state.verse + 1
     return (
       <div className="havamal">
         <div className="verse" key={verse}>
-          <div key={verse}>
-            <p className="verse__english">{this.displayHavamalEnglish(verse)}</p>
-            <p className="verse__norse">{this.displayHavamalNorse(verse)}</p>
-            <em className="citation">Havamal: {verse + 1}, {this.whichPoem(verse + 1)}</em>
-          </div>
+          <p className="verse__english">{this.displayHavamalEnglish(verse)}</p>
+          <p className="verse__norse">{this.displayHavamalNorse(verse)}</p>
+          <em className="citation">Havamal: {prettyVerse}, {this.whichPoem(prettyVerse)}</em>
         </div>
           <a className="randomLink" onClick={this.getRandom}>Random Stanza</a>
       </div>

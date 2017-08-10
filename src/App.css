@@ -4,39 +4,47 @@ html {
 
 @media (max-width: 1000px) {
   html {
-    font-size: calc(12px + .4vw);
+    font-size: calc(7px + .4vw);
   }
 }
 
 .mood {
-  height: 100vh;
-  width: 100vw;
-  background: url('./images/anthony-ingram-18853.jpg');
+  margin: 0;
+  padding: 0;
+  background-image: url('./images/anthony-ingram-18853.jpg');
+  background-repeat: no-repeat;
   background-size: cover;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .havamal {
   height: 100vh;
-  width: 100vw;
-  display: flex;
+  position: relative;
   color: #f5f5f5;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.06em;
+  overflow-y: auto;
 }
 
 .verse {
-  display: flex;
-  align-self: center;
-  justify-content: center;
+  margin: 0 auto;
   font-family: 'Cormorant', serif;
+  width: 50%;
+  padding: 2rem 0;
+  overflow-y: auto;
 }
 
-.verse > * {
-  width: 50%;
+@media (max-width: 1000px) {
+  .verse {
+    width: 90%;
+    padding: 2rem 0;
+  }
 }
 
 .verse__english {
   font-size: 2.4rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .verse__english:first-letter {
@@ -52,7 +60,7 @@ html {
 }
 
 .randomLink {
-  position: absolute;
+  position: fixed;
   bottom: 2%;
   right: 2%;
   cursor: pointer;
