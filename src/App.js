@@ -32,6 +32,7 @@ class App extends Component {
     if (verse !== '/' && parseInt(verse.slice(1) - 1, 10) < 164 ) {
       return parseInt(verse.slice(1) - 1, 10);
     }
+    return null;
   }
 
   getRandom() {
