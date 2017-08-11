@@ -29,7 +29,7 @@ class App extends Component {
 
   searchedStanza() {
     const verse = this.history.location.hash;
-    if (verse !== '/' && parseInt(verse.slice(1) - 1, 10) < 164 ) {
+    if (verse !== '' && parseInt(verse.slice(1) - 1, 10) < 164 ) {
       return parseInt(verse.slice(1) - 1, 10);
     }
     return null;
